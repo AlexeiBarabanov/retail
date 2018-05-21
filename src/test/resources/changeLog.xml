@@ -1,0 +1,526 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Unnamed" id="1526870282698-1">
+        <createSequence sequenceName="shipment_detail_shipment_detail_id_seq"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-2">
+        <createSequence sequenceName="shipment_shipment_id_seq"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-3">
+        <createTable tableName="contract">
+            <column name="amount" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="details" type="VARCHAR"/>
+            <column name="organization_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column autoIncrement="true" name="contract_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="contract_contract_id_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-4">
+        <createTable tableName="location">
+            <column autoIncrement="true" name="location_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="location_pkey"/>
+            </column>
+            <column name="city" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-5">
+        <createTable remarks="Организация заказачик" tableName="organization">
+            <column autoIncrement="true" name="organization_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="organization_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-6">
+        <createTable tableName="payment">
+            <column autoIncrement="true" name="payment_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="payment_pkey"/>
+            </column>
+            <column name="type" type="VARCHAR(256)"/>
+            <column defaultValueComputed="('now'::text)::date" name="date" type="date"/>
+            <column name="amount" type="INTEGER"/>
+            <column name="contract_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-7">
+        <createTable remarks="Товар" tableName="product">
+            <column autoIncrement="true" name="product_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-8">
+        <createTable tableName="shipment">
+            <column autoIncrement="true" name="shipment_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="shipment_shipment_id_pk"/>
+            </column>
+            <column name="date_shipment" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_delivery" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-9">
+        <createTable tableName="shipment_detail">
+            <column autoIncrement="true" name="shipment_detail_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="shipment_detail_pkey"/>
+            </column>
+            <column name="shipment_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-10">
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="200"/>
+            <column name="details" value=""/>
+            <column name="organization_id" valueNumeric="1"/>
+            <column name="product_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="300"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="1"/>
+            <column name="product_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="100"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="2"/>
+            <column name="product_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="50"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="2"/>
+            <column name="product_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="100"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="3"/>
+            <column name="product_id" valueNumeric="3"/>
+            <column name="contract_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="50"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="3"/>
+            <column name="product_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="150"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="3"/>
+            <column name="product_id" valueNumeric="4"/>
+            <column name="contract_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="10"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="20"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="9"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="30"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="3"/>
+            <column name="contract_id" valueNumeric="10"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="40"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="4"/>
+            <column name="contract_id" valueNumeric="11"/>
+        </insert>
+        <insert tableName="contract">
+            <column name="amount" valueNumeric="50"/>
+            <column name="details"/>
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="5"/>
+            <column name="contract_id" valueNumeric="12"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-11">
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="1"/>
+            <column name="city" value="Moscow"/>
+            <column name="address" value="Kievskiy"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="2"/>
+            <column name="city" value="Saint-Petersburg"/>
+            <column name="address" value="Sovetskaya"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="3"/>
+            <column name="city" value="Novosibirsk"/>
+            <column name="address" value="Severnaya"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="4"/>
+            <column name="city" value="Krasnodar"/>
+            <column name="address" value="Lenina"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="5"/>
+            <column name="city" value="Kazan"/>
+            <column name="address" value="Filatova"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="6"/>
+            <column name="city" value="Volgograd"/>
+            <column name="address" value="Stalina"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="7"/>
+            <column name="city" value="Barnaul"/>
+            <column name="address" value="Soldatskaya"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="8"/>
+            <column name="city" value="Vologda"/>
+            <column name="address" value="Pobedy"/>
+        </insert>
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="9"/>
+            <column name="city" value="Orel"/>
+            <column name="address" value="Gavrilova"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-12">
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="1"/>
+            <column name="name" value="Organization A"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="2"/>
+            <column name="name" value="Organization B"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="3"/>
+            <column name="name" value="Organization C"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="4"/>
+            <column name="name" value="Organization D"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="5"/>
+            <column name="name" value="Organization E"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="6"/>
+            <column name="name" value="Organization F"/>
+        </insert>
+        <insert tableName="organization">
+            <column name="organization_id" valueNumeric="7"/>
+            <column name="name" value="Organization G"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-13">
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="4"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-20"/>
+            <column name="amount" valueNumeric="200"/>
+            <column name="contract_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="6"/>
+            <column name="type" value=""/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="299"/>
+            <column name="contract_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="7"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="50"/>
+            <column name="contract_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="8"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="50"/>
+            <column name="contract_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="9"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="98"/>
+            <column name="contract_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="10"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="50"/>
+            <column name="contract_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="11"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="150"/>
+            <column name="contract_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="12"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="7"/>
+            <column name="contract_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="13"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="20"/>
+            <column name="contract_id" valueNumeric="9"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="14"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="30"/>
+            <column name="contract_id" valueNumeric="10"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="15"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="40"/>
+            <column name="contract_id" valueNumeric="11"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="payment_id" valueNumeric="16"/>
+            <column name="type"/>
+            <column name="date" valueDate="2018-05-21"/>
+            <column name="amount" valueNumeric="50"/>
+            <column name="contract_id" valueNumeric="12"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-14">
+        <insert tableName="product">
+            <column name="product_id" valueNumeric="1"/>
+            <column name="name" value="Potato"/>
+        </insert>
+        <insert tableName="product">
+            <column name="product_id" valueNumeric="2"/>
+            <column name="name" value="Tomato"/>
+        </insert>
+        <insert tableName="product">
+            <column name="product_id" valueNumeric="3"/>
+            <column name="name" value="Beans"/>
+        </insert>
+        <insert tableName="product">
+            <column name="product_id" valueNumeric="4"/>
+            <column name="name" value="Carrot"/>
+        </insert>
+        <insert tableName="product">
+            <column name="product_id" valueNumeric="5"/>
+            <column name="name" value="Pickle"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-15">
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="2"/>
+            <column name="date_shipment" valueDate="2018-06-07"/>
+            <column name="date_delivery" valueDate="2018-06-14"/>
+            <column name="location_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="3"/>
+            <column name="date_shipment" valueDate="2018-05-31"/>
+            <column name="date_delivery" valueDate="2018-06-08"/>
+            <column name="location_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="4"/>
+            <column name="date_shipment" valueDate="2018-06-11"/>
+            <column name="date_delivery" valueDate="2018-06-13"/>
+            <column name="location_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="5"/>
+            <column name="date_shipment" valueDate="2018-05-23"/>
+            <column name="date_delivery" valueDate="2018-05-26"/>
+            <column name="location_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="6"/>
+            <column name="date_shipment" valueDate="2018-07-02"/>
+            <column name="date_delivery" valueDate="2018-07-06"/>
+            <column name="location_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="7"/>
+            <column name="date_shipment" valueDate="2018-07-03"/>
+            <column name="date_delivery" valueDate="2018-07-07"/>
+            <column name="location_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="8"/>
+            <column name="date_shipment" valueDate="2018-07-05"/>
+            <column name="date_delivery" valueDate="2018-07-08"/>
+            <column name="location_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="9"/>
+            <column name="date_shipment" valueDate="2018-05-01"/>
+            <column name="date_delivery" valueDate="2018-05-05"/>
+            <column name="location_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="10"/>
+            <column name="date_shipment" valueDate="2018-05-07"/>
+            <column name="date_delivery" valueDate="2018-05-08"/>
+            <column name="location_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="11"/>
+            <column name="date_shipment" valueDate="2018-05-09"/>
+            <column name="date_delivery" valueDate="2018-05-12"/>
+            <column name="location_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="12"/>
+            <column name="date_shipment" valueDate="2018-05-15"/>
+            <column name="date_delivery" valueDate="2018-05-18"/>
+            <column name="location_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="shipment">
+            <column name="shipment_id" valueNumeric="1"/>
+            <column name="date_shipment" valueDate="2018-04-05"/>
+            <column name="date_delivery" valueDate="2018-04-19"/>
+            <column name="location_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-16">
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="1"/>
+            <column name="shipment_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="2"/>
+            <column name="shipment_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="3"/>
+            <column name="shipment_id" valueNumeric="1"/>
+            <column name="contract_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="4"/>
+            <column name="shipment_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="5"/>
+            <column name="shipment_id" valueNumeric="2"/>
+            <column name="contract_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="6"/>
+            <column name="shipment_id" valueNumeric="3"/>
+            <column name="contract_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="7"/>
+            <column name="shipment_id" valueNumeric="4"/>
+            <column name="contract_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="8"/>
+            <column name="shipment_id" valueNumeric="4"/>
+            <column name="contract_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="10"/>
+            <column name="shipment_id" valueNumeric="4"/>
+            <column name="contract_id" valueNumeric="10"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="11"/>
+            <column name="shipment_id" valueNumeric="5"/>
+            <column name="contract_id" valueNumeric="11"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="12"/>
+            <column name="shipment_id" valueNumeric="9"/>
+            <column name="contract_id" valueNumeric="12"/>
+        </insert>
+        <insert tableName="shipment_detail">
+            <column name="shipment_detail_id" valueNumeric="9"/>
+            <column name="shipment_id" valueNumeric="10"/>
+            <column name="contract_id" valueNumeric="9"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-17">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="contract" constraintName="contract_organization_organization_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="organization_id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-18">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="contract" constraintName="contract_product_product_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="product_id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-19">
+        <addForeignKeyConstraint baseColumnNames="contract_id" baseTableName="payment" constraintName="payment_contract_contract_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="contract_id" referencedTableName="contract" validate="true"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-20">
+        <addForeignKeyConstraint baseColumnNames="contract_id" baseTableName="shipment_detail" constraintName="shipment_detail_contract_contract_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="contract_id" referencedTableName="contract" validate="true"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-21">
+        <addForeignKeyConstraint baseColumnNames="shipment_id" baseTableName="shipment_detail" constraintName="shipment_detail_shipment_shipment_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="shipment_id" referencedTableName="shipment" validate="true"/>
+    </changeSet>
+    <changeSet author="Unnamed" id="1526870282698-22">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="shipment" constraintName="shipment_location_location_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="location_id" referencedTableName="location" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
