@@ -53,7 +53,9 @@
             </column>
             <column name="type" type="VARCHAR(256)"/>
             <column defaultValueComputed="('now'::text)::date" name="date" type="date"/>
-            <column name="amount" type="INTEGER"/>
+            <column name="amount" type="INTEGER">
+                <constraints checkConstraint="CHECK (amount &lt;= 500)"/>
+            </column>
             <column name="contract_id" type="INTEGER">
                 <constraints nullable="false"/>
             </column>
