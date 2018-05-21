@@ -17,13 +17,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.2</version>
@@ -40,24 +33,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
-                        <executions>
-                            <execution>
-                                <id>xxx</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>Liquibase update</echo>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>org.liquibase</groupId>
                         <artifactId>liquibase-maven-plugin</artifactId>
                         <version>3.6.1</version>
@@ -73,10 +48,10 @@
                                 </goals>
                             </execution>
                             <execution>
-                                <id>Drop database</id>
+                                <id>DropAll</id>
                                 <phase>post-integration-test</phase>
                                 <goals>
-                                    <goal>rollback</goal>
+                                    <goal>dropAll</goal>
                                 </goals>
                             </execution>
                         </executions>
